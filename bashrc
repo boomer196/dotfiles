@@ -143,10 +143,10 @@ fi
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /Users/rmcgeary/.config/yarn/global/node_modules/tabtab/.completions/serverless.bash ] && . /Users/rmcgeary/.config/yarn/global/node_modules/tabtab/.completions/serverless.bash
+[ -f /Users/jarndt/.config/yarn/global/node_modules/tabtab/.completions/serverless.bash ] && . /Users/jarndt/.config/yarn/global/node_modules/tabtab/.completions/serverless.bash
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /Users/rmcgeary/.config/yarn/global/node_modules/tabtab/.completions/sls.bash ] && . /Users/rmcgeary/.config/yarn/global/node_modules/tabtab/.completions/sls.bash
+[ -f /Users/jarndt/.config/yarn/global/node_modules/tabtab/.completions/sls.bash ] && . /Users/jarndt/.config/yarn/global/node_modules/tabtab/.completions/sls.bash
 
 ############################################################
 ## Other
