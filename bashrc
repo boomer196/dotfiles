@@ -100,7 +100,9 @@ shopt -s extglob
 shopt -s checkwinsize
 
 export PAGER="less"
-export EDITOR="emacsclient -nw"
+#export EDITOR="emacsclient -nw"
+export EDITOR="vi"
+set -o vi
 
 ############################################################
 ## History
