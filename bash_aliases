@@ -68,8 +68,15 @@ alias lal="ls -alh"
 ## Git
 ############################################################
 
+if [ -d "/Applications/GitX.app/" ]; then
+  alias gitx="/Applications/GitX.app/Contents/Resources/gitx"
+fi
+
+function gb {
+  tput rmam; git branch -v $*; tput smam
+}
 alias g="git"
-alias gb="tput rmam; git branch -a -v; tput smam"
+# alias gb="tput rmam; git branch -a -v; tput smam"
 alias gc="git commit -v"
 alias gca="git commit -v -a"
 alias gd="git diff"
@@ -81,7 +88,7 @@ alias gs="git status -sb"
 alias gr="git remote"
 alias grp="git remote prune"
 alias gcp="git cherry-pick"
-alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset' --abbrev-commit --date=relative"
+alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset %C(cyan)%an%Creset'"
 alias ggs="gg --stat"
 alias gsl="git shortlog -sn --no-merges"
 alias gw="git whatchanged"
@@ -299,6 +306,18 @@ function heroku_command {
   fi
 }
 
+function hdemo {
+  heroku `heroku_command $*` --remote demo
+}
+
+function hdev {
+  heroku `heroku_command $*` --remote dev
+}
+
+function hdev2 {
+  heroku `heroku_command $*` --remote dev2
+}
+
 function hstaging {
   heroku `heroku_command $*` --remote staging
 }
@@ -358,6 +377,7 @@ function r {
 
 alias restart="touch tmp/restart.txt"
 alias refresh="rehash && ss && direnv allow && restart"
+alias rr="refresh"
 
 ############################################################
 ## MongoDB
@@ -423,12 +443,6 @@ alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias myip4="curl -s4 http://icanhazip.com/"
 alias mylocation="curl -s4 http://ip-api.com/json | prettyjson"
 
-function serve {
-  local port=$1
-  : ${port:=3000}
-  ruby -rwebrick -e"s = WEBrick::HTTPServer.new(:Port => $port, :DocumentRoot => Dir.pwd, :MimeTypes => WEBrick::HTTPUtils::load_mime_types('/etc/apache2/mime.types')); trap(%q(INT)) { s.shutdown }; s.start"
-}
-
 function eachd {
   for dir in *; do
     cd $dir
@@ -461,6 +475,12 @@ function colors() {
   for ((i=0; i<$y; i++)); do
     color $(seq $((i*$x+16)) $((i*$x+$x-1+16)))
   done
+}
+
+# Slow cat down
+function scroll() {
+  # brew install pv
+  cat $1 | pv --quiet --line-mode --rate-limit 2500
 }
 
 ############################################################
