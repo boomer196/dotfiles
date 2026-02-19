@@ -77,8 +77,10 @@ function gb {
 }
 alias g="git"
 # alias gb="tput rmam; git branch -a -v; tput smam"
+alias gba="git branch -a -v"
 alias gc="git commit -v"
 alias gca="git commit -v -a"
+alias gcob="git checkout -b"
 alias gd="git diff"
 alias gl="git pull"
 alias glr="git pull --rebase"
@@ -87,6 +89,7 @@ alias gp="git push"
 alias gs="git status -sb"
 alias gr="git remote"
 alias grp="git remote prune"
+alias grhu="git reset --hard @{upstream}"
 alias gcp="git cherry-pick"
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci)%Creset %C(cyan)%an%Creset'"
 alias ggs="gg --stat"
@@ -129,7 +132,8 @@ function gu {
 
 function gco {
   if [ -z "$1" ]; then
-    git checkout master
+    git checkout $(git symbolic-ref --short refs/remotes/origin/HEAD | awk -F/ '{print $2}')
+    git sync
   else
     git checkout $*
   fi
@@ -243,6 +247,7 @@ function ignore_vendor_ruby {
 
 alias b="bundle"
 alias bu="b update"
+alias bub="bu --bundler"
 alias be="b exec"
 alias binit="bi && bundle package"
 alias ba="bundle-audit update && bundle-audit"
@@ -364,6 +369,7 @@ function k {
 ############################################################
 
 alias tl="tail -f log/development.log"
+alias tp="tail -1000 -f ~/Library/Logs/puma-dev.log"
 alias ss="spring status && echo && spring stop"
 
 # Rails 3 or 4
@@ -442,6 +448,9 @@ alias whichlinux='uname -a; cat /etc/*release; cat /etc/issue'
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias myip4="curl -s4 http://icanhazip.com/"
 alias mylocation="curl -s4 http://ip-api.com/json | prettyjson"
+
+# curl with response time outptu:
+alias curlt="curl -w '\n\n------------------------\nResponse time: %{time_total}s\n'"
 
 function eachd {
   for dir in *; do
